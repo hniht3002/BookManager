@@ -6,9 +6,10 @@
   <div class="ms-3 col-8 mt-3 mb-3">
     <form class="d-flex gap-3" th:action="@{/category/update}" method="POST" th:object = "${current}">
       <div class="">
+        <input type="hidden" th:value="*{id}" th:field = "*{id}">
         <input type="text" class="form-control" id="category" placeholder="Add new category" th:field="*{name}" th:value = "*{name}">
       </div>
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">Update</button>
     </form>
   </div>
 

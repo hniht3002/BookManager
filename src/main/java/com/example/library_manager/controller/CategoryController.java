@@ -47,4 +47,12 @@ public class CategoryController {
         model.addAttribute("categories", categoryService.findAllExceptId(id));
         return "/sections/category/edit";
     }
+
+    @PostMapping(value = "/category/update")
+    public String update(@ModelAttribute Category category) {
+        Category c = categoryService.findById(category.getId());
+        c.setName(category.getName());
+        categoryService.save(c);
+        return "redirect:/category";
+    }
 }
