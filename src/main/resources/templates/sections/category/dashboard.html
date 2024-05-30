@@ -28,7 +28,7 @@
                     <th scope="row" th:text="${category.id}"></th>
                     <td th:text="${category.name}"></td>
                     <td>
-                        <a href="#" type="button" class="btn btn-success">
+                        <a th:href="'/category/edit?id=' + ${category.id}" type="button" class="btn btn-success">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <a th:href="'/category/delete?id=' + ${category.id}" type="button" class="btn btn-danger">

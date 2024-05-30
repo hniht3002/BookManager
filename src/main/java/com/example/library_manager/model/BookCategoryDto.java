@@ -13,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class BookCategoryDto {
+    private Long id;
     private String name;
     private String year;
     private String cover;

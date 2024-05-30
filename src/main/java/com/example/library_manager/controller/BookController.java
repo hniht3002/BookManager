@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 
@@ -53,4 +54,32 @@ public class BookController {
         bookService.delete(Long.parseLong(id));
         return "redirect:/book";
     }
+
+    @GetMapping("/book/edit")
+    public String edit(@RequestParam Long id, Model model) {
+        Book book = bookService.findById(id);
+        BookCategoryDto bcDto = new BookCategoryDto();
+        bcDto.setId(book.getId());
+        bcDto.setName(book.getName());
+        bcDto.setYear(book.getYear());
+        bcDto.setCover(book.getCover());
+        bcDto.setCategories(book.getCategories());
+
+        model.addAttribute("bcDto", bcDto);
+        model.addAttribute("categories", categoryService.findAll());
+        return "/sections/book/edit";
+    }
+
+    @PostMapping("/book/update")
+    public String update(@ModelAttribute BookCategoryDto bcDto) {
+        System.out.println(bcDto.getCategories());
+        Book book = bookService.findById(bcDto.getId());
+        book.setName(bcDto.getName());
+        book.setYear(bcDto.getYear());
+        book.setCover(bcDto.getCover());
+        book.setCategories(bcDto.getCategories());
+        bookService.save(book);
+        return "redirect:/book";
+    }
+
 }

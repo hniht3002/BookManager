@@ -40,4 +40,11 @@ public class CategoryController {
         categoryService.delete(id);
         return "redirect:/category";
     }
+
+    @GetMapping(value = "/category/edit")
+    public String edit(@RequestParam Long id, Model model) {
+        model.addAttribute("current", categoryService.findById(id));
+        model.addAttribute("categories", categoryService.findAllExceptId(id));
+        return "/sections/category/edit";
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -36,8 +37,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(Long id) {
-        return categoryRepository.findById(id);
+    public Category findById(Long id) {
+        return categoryRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Category> findAllExceptId(Long id) {
+        return categoryRepository.findAll().stream()
+                .filter(c -> !c.getId().equals(id))
+                .collect(Collectors.toList());
     }
 
 }
