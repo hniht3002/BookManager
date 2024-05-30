@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout = "https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate = "~{layout}"
+      layout:fragment = "content"
+>
+<header>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/css/multi-select-tag.css">
+</header>
+
+<div>
+  <div class="col-8 ms-4">
+    <h2>Add new book</h2>
+    <form th:action="@{/book/store}" method="post" th:object="${bcDto}">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" th:field="*{name}">
+      </div>
+      <div class="mb-3">
+        <label for="year" class="form-label">Published Year</label>
+        <input type="text" class="form-control" id="year" th:field="*{year}">
+      </div>
+      <div class="mb-3">
+        <label for="cover" class="form-label">Cover image</label>
+        <input type="text" class="form-control" id="cover"  th:field="*{cover}">
+      </div>
+      <div class="mb-3">
+        <label for="categories" class="form-label">Choose Category</label>
+        <select class="form-select" id="categories" multiple="multiple" th:field="*{categories}">
+          <option value="0">Uncategorized</option>
+          <th:block th:each="category : ${categories}">
+            <option th:value="${category.id}" th:text="${category.name}"></option>
+          </th:block>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
+<script>
+    new MultiSelectTag('categories')
+</script>
+</html>

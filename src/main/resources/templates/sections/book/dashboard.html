@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout = "https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate = "~{layout}"
+>
+<div layout:fragment = "content">
+  <div class="mb-5 mt-5 me-5 d-flex justify-content-end">
+    <a type="button" class="btn btn-primary" href="/book/add">
+      <i class="fa-solid fa-plus"></i> Add new book
+    </a>
+  </div>
+
+  <div class="ms-3">
+    <div class ="row g-4 ">
+      <div th:each="book : ${books}" class="col-xl-2 col-lg-4 col-md-6 col-sm-6 col-12"
+           style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+<!--        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0Wl77ksq_3BQQDALFWzJpa5WCeOyjMrmwUA&s" alt="">-->
+        <img th:src="${book.cover}" alt="" style="height: 300px; width: 200px; object-fit: cover;">
+        <p th:text = ${book.name} style="text-align: center"></p>
+
+        <div class="row">
+          <div class="col-6">
+            <a href="#" type="button" class="btn btn-success">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+          </div>
+          <div class="col">
+            <a th:href="'/book/delete?id=' + ${book.id}" type="button" class="btn btn-danger">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
